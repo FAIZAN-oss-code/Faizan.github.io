@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Level 17</title>
+<title>Tap The Cake 🎂</title>
 
 <style>
 body{
@@ -11,24 +11,22 @@ body{
   display:flex;
   justify-content:center;
   align-items:center;
-  flex-direction:column;
   background: radial-gradient(circle at center,#2b1055,#000000);
-  color:white;
-  font-family:sans-serif;
-  text-align:center;
   overflow:hidden;
+  font-family:sans-serif;
 }
 
+/* Aura Glow */
 .aura{
   position:absolute;
   width:350px;
   height:350px;
   background: radial-gradient(circle,
     rgba(255,215,0,0.8) 0%,
-    rgba(255,0,255,0.4) 40%,
+    rgba(255,0,255,0.5) 40%,
     transparent 70%);
   border-radius:50%;
-  filter:blur(50px);
+  filter:blur(60px);
   animation:pulse 3s infinite;
 }
 
@@ -38,27 +36,38 @@ body{
   100%{transform:scale(1)}
 }
 
+/* Cake */
 .cake{
-  font-size:90px;
-  z-index:2;
+  font-size:120px;
   cursor:pointer;
-  transition:0.3s;
+  z-index:2;
+  transition:0.4s;
 }
 
 .cake:hover{
   transform:scale(1.1);
 }
 
-h1{
-  margin-top:20px;
-  font-size:30px;
-  text-shadow:0 0 20px gold;
+/* Flash Effect */
+.flash{
+  position:fixed;
+  width:100%;
+  height:100%;
+  background:white;
+  top:0;
+  left:0;
+  opacity:0;
+  pointer-events:none;
 }
 
-#countdown{
-  margin-top:15px;
-  font-size:18px;
-  color:gold;
+.flash.active{
+  animation:flashAnim 0.6s forwards;
+}
+
+@keyframes flashAnim{
+  0%{opacity:0;}
+  50%{opacity:1;}
+  100%{opacity:0;}
 }
 
 </style>
@@ -68,29 +77,26 @@ h1{
 
 <div class="aura"></div>
 
-<div class="cake" onclick="unlock()">🎂</div>
+<div class="cake" onclick="openSite()">🎂</div>
 
-<h1 id="title">Happy 17th Birthday Fahad 👑</h1>
-
-<div id="countdown"></div>
+<div class="flash" id="flash"></div>
 
 <script>
-const birthday = new Date("March 6, 2026 00:00:00").getTime();
 
-setInterval(()=>{
-  const now = new Date().getTime();
-  const distance = birthday - now;
+function openSite(){
 
-  const days = Math.floor(distance/(1000*60*60*24));
+  // cake grow effect
+  document.querySelector(".cake").style.transform = "scale(1.5)";
 
-  document.getElementById("countdown").innerHTML =
-  days + " Days to Level 17 🔓";
-},1000);
+  // flash effect
+  document.getElementById("flash").classList.add("active");
 
-function unlock(){
-  document.getElementById("title").innerHTML =
-  "LEVEL 17 UNLOCKED 🔥";
+  // redirect after delay
+  setTimeout(function(){
+    window.location.href = "https://faizan-oss-code.github.io/birthday.html";
+  },800);
 }
+
 </script>
 
 </body>
